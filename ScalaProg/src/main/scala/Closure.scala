@@ -1,9 +1,5 @@
 
-
-class Closure {
-  
-}
-object Closure extends App{
+object ClosureDemo extends App{
   
   var outerFunc=(errorCode:Int,exception:String)=>{
     
