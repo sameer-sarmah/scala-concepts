@@ -1,3 +1,4 @@
+package typeclasses
 
 
 object TypeClass extends App{
