@@ -7,18 +7,14 @@ object ImplicitDemo extends App {
   ForeignExchange.printEuro(d)
 
 
-  var one = new Num(1)
-  var two = new Num(2)
+  var one = new NumberOpOverloading(1)
+  var two = new NumberOpOverloading(2)
   println(one + two)
   println(1 + two)
 }
 
-package IntConversion {
-
-  object IntConv {
-    implicit def intToNum(num: Int): Num = new Num(num) //implicit use case
-  }
-
+object IntConv {
+  implicit def intToNum(num: Int): NumberOpOverloading = new NumberOpOverloading(num) //implicit use case
 }
 
 case class Dollar(var value: Double)
