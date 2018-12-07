@@ -1,31 +1,33 @@
 package typeclasses
 
 
-
-trait Animal[T <: Food] {
-  def eat(food: T)
+trait Speciality
+case class Medicine() extends Speciality{
+  override def toString: String = "Medicine"
+}
+case class ComputerScience() extends Speciality{
+  override def toString: String = "ComputerScience"
 }
 
-
-class Cow extends Animal[Grass] {
-  def eat(food: Grass)={
-    println( "eating grass")
+trait Job[T <: Speciality]{
+  def work(skill:T)
+}
+case class Doctor() extends Job[Medicine]{
+  override def work(skill: Medicine): Unit = {
+    println(s"Speciality is ${skill} and they heal people")
+  }
+}
+case class SoftwareEngineer() extends Job[ComputerScience]{
+  override def work(skill: ComputerScience): Unit = {
+    println(s"Speciality is ${skill} and they build software")
   }
 }
 
-
-class Cat extends Animal[Fish] {
-  override def eat(food: Fish) {
-    println( "eating fish")
-  }
-}
-
-object TypeClassWithBounds extends App{
-  var grass=new Grass()
-  var cow =new Cow()
-  cow.eat(grass)
-
-  var fish=new Fish()
-  var cat=new Cat()
-  cat.eat(fish)
+object TypeclassWithBounds extends App{
+  val med=Medicine()
+  val doctor = Doctor()
+  doctor.work(med)
+  val cs=ComputerScience()
+  val eng=SoftwareEngineer()
+  eng.work(cs)
 }

@@ -1,33 +1,40 @@
-import typeclasses.{Fish, Food, Grass}
+
 
 object TypeMember extends App{
-  var grass=new Grass()
-  var cow =new Cow()
-  cow.eat(grass)
-
- var fish=new Fish()
- var cat=new Cat()
- cat.eat(fish)
- var animalsThatEatGrass:List[Animal{type SuitableFood=Grass}]=Nil
+  val med=Medicine()
+  val doctor = Doctor()
+  doctor.work(med)
+  val cs=ComputerScience()
+  val eng=SoftwareEngineer()
+  eng.work(cs)
 }
 
 
-abstract class Animal {
-type SuitableFood <: Food
-def eat(food: SuitableFood)
+trait Speciality
+case class Medicine() extends Speciality{
+  override def toString: String = "Medicine"
+}
+case class ComputerScience() extends Speciality{
+  override def toString: String = "ComputerScience"
 }
 
-class Cow extends Animal {
-type SuitableFood = Grass
-override def eat(food: Grass) {
-  println( "eating grass")
+trait Job{
+  type Skills <: Speciality
+  def work(skill:Skills)
 }
+case class Doctor() extends Job{
+  type Skills=Medicine
+
+  override def work(skill: Medicine): Unit = {
+    println(s"Speciality is ${skill} and they heal people")
+  }
+}
+case class SoftwareEngineer() extends Job{
+  type Skills=ComputerScience
+  override def work(skill: ComputerScience): Unit = {
+    println(s"Speciality is ${skill} and they build software")
+  }
 }
 
-class Cat extends Animal {
-type SuitableFood = Fish
-override def eat(food: Fish) {
-  println( "eating fish")
-}
-}
+
 
